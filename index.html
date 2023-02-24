@@ -45,7 +45,29 @@
 <h2 id="1-api-count-download">1. Postman Api Count:<a href="https://raw.githubusercontent.com/penetesterhelper/penetesterhelper.github.io/main/apiCount.py" download> Download</a></h2>
 <h2 id="1-api-count-download">2. Base64EncodeDecode: </h2>
 <h3 id="1-api-count-download">2.1 File Base64EncodeDecode: <a href="https://raw.githubusercontent.com/penetesterhelper/penetesterhelper.github.io/main/base64decoder.py" download> Download</a></h3>
-<h1 id="cia">CIA</h1>
+
+<h3 id="1-api-count-download">Base64EncodeDecode Simple txt</h3>
+	    <p>Decode Base64</p>
+<input type="text" id="myInput" oninput="decode()">
+<p id="decodeValue"></p>
+
+<p>Encode Base64</p>
+<input type="text" id="myInput" oninput="encode()">
+<p id="encodeValue"></p>
+
+<script>
+function decode() {
+  let text = document.getElementById("myInput").value;
+  document.getElementById("decodeValue").innerHTML = "decodeValue: " + text;
+}
+function encode() {
+  let text = document.getElementById("myInput").value;
+  document.getElementById("encodeValue").innerHTML = "encodeValue: " + text;
+}
+</script>
+
+	    
+ <h1 id="cia">CIA</h1>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Integrity : data only change by auth.
 Avalability : Available data when user need.
 Confidentility : Data access by auth.
