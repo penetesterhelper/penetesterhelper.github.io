@@ -5,17 +5,7 @@ f = open('/mnt/c/Users/Asus/OneDrive/Desktop/count/jsonformatter.json') #json fi
 
 data = json.load(f)
 count = 0
-#for i in data['paths']:
-    
-	#apiList = i
-    #apiMethod = json.dumps(data['paths'][apiList])
-    #apiMethodJson = json.loads(apiMethod)
-    #for i in apiMethodJson:
-     #   if(i!='parameters'):
-      #      print(i+' '+apiList)
-    
-    #print(i)
-    
+   
 for i in data['paths']:
     apiList = i
     apiMethod = json.dumps(data['paths'][apiList])
