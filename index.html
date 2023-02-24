@@ -48,22 +48,22 @@
 
 <h3 id="1-api-count-download">2.2 Base64EncodeDecode Simple txt</h3>
 <div style="text-align:center"><p>Decode Base64</p>
-<input type="text" id="myInput" oninput="decode()">
+<input type="text" id="myInput" oninput="decode()"></br>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><p id="decodeValue"></p></code></pre></div></div>
 
 
 <p>Encode Base64</p>
-<input type="text" id="myInputEncode" oninput="encode()">
+<input type="text" id="myInputEncode" oninput="encode()"></br>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><p id="encodeValue"></p></code></pre></div></div>
 </div>
 <script>
 function decode() {
   let text = document.getElementById("myInput").value;
-  document.getElementById("decodeValue").innerHTML = text;
+  document.getElementById("decodeValue").innerHTML = atob(text);
 }
 function encode() {
   let text = document.getElementById("myInputEncode").value;
-  document.getElementById("encodeValue").innerHTML = text;
+  document.getElementById("encodeValue").innerHTML = btoa(text);
 }
 </script>
 
