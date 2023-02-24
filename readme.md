@@ -1,5 +1,5 @@
 # Tools
-## 1. Api Count: [Download](https://github.com/krrathod/penetesterhelper.github.io/blob/main/apiCount.py)
+## 1. Api Count: [Download](https://github.com/penetesterhelper/penetesterhelper.github.io/blob/main/apiCount.py)
 
 # CIA
 	Integrity : data only change by auth.
