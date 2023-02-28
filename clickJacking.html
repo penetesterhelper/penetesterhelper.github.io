@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+		
+
+		
+</body>
+
+<script>
+console.log(window.location.href)
+var extractURL = parseURLParams(window.location.href)['url'][0]
+
+document.write('<div style="text-align:center">	<h1 style="text-align:center">POC Of <b style="color:red">CLICKJACKING</b> Vulnerability</h1><iframe src="'+extractURL+'" style="text-align:center" border:2px="" solid="" red;="" width="80%" height="600"></iframe></div>')
+
+function parseURLParams(url) {
+    var queryStart = url.indexOf("?") + 1,
+        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
+        query = url.slice(queryStart, queryEnd - 1),
+        pairs = query.replace(/\+/g, " ").split("&"),
+        parms = {}, i, n, v, nv;
+
+    if (query === url || query === "") return;
+
+    for (i = 0; i < pairs.length; i++) {
+        nv = pairs[i].split("=", 2);
+        n = decodeURIComponent(nv[0]);
+        v = decodeURIComponent(nv[1]);
+
+        if (!parms.hasOwnProperty(n)) parms[n] = [];
+        parms[n].push(nv.length === 2 ? v : null);
+    }
+    return parms;
+}
+
+</script>
+</html>
