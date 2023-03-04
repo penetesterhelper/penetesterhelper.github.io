@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+		
+	<div style="text-align:center; margin-top:100px">
+		<h1 style="text-align:center">POC Of <b style="color:red">HOST HEADER REDIRECTION</b> Vulnerability</h1>
+        <p1>Attacker Web Page</p1>
+		
+		</div>
+		
+</body>
+</html>
