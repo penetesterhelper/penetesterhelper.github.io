@@ -5,7 +5,7 @@
 </head>
 <body>
 		
-
+		<button type="button" class="btn btn-default">Take a Screenshot!</button>
 		
 </body>
 
@@ -34,6 +34,15 @@ function parseURLParams(url) {
     }
     return parms;
 }
+	
+document.querySelector('button').addEventListener('click', function() {
+        html2canvas(document.querySelector('.specific'), {
+            onrendered: function(canvas) {
+                // document.body.appendChild(canvas);
+              return Canvas2Image.saveAsPNG(canvas);
+            }
+        });
+    });
 
 </script>
 </html>
