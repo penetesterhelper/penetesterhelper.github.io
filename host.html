@@ -113,7 +113,7 @@ async function renderUsers(url) {
     if(JSON.parse(data).Status==200){
  		 document.getElementById("msg").innerHTML = "<h3 style='color:red'> Status: "+JSON.parse(data).Status+" "+JSON.parse(data).Msg+"</h3></br>";
     }else{
-    	  document.getElementById("msg").innerHTML = "<h3 style='color:green'> Status: "+JSON.parse(data).Status+" "+JSON.parse(data).Msg+"</h3>";
+    	  document.getElementById("msg").innerHTML = "<br><h3 style='color:green'> Status: "+JSON.parse(data).Status+" "+JSON.parse(data).Msg+"</h3>";
     }
   
   }
