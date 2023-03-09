@@ -37,7 +37,7 @@ async function getUsers(url) {
 async function renderUsers(url) {
     let users = await getUsers(url);
     data = '{"Status": "'+users.status+'", "Msg": "'+users.status_message+'"}';
-    document.getElementById("value").innerHTML = JSON.stringify(JSON.parse(data));
+    document.getElementById("value").innerHTML = JSON.parse(data);
   }
 var url = parseURLParams(window.location.href)['url'][0]
 renderUsers("https://broodier-aim.000webhostapp.com/hostinjection/index.php?url="+url);    
