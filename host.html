@@ -2,78 +2,30 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta charset="UTF-8">
+
 <style>
-/* Center the loader */
-#loader {
-  position: absolute;
-  z-index: 1;
-  width: 50px;
-  height: 50px;
-  margin: 0 0 0 0;
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
-}
 
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Add animation to "page content" */
-.animate-bottom {
-  position: relative;
-  -webkit-animation-name: animatebottom;
-  -webkit-animation-duration: 1s;
-  animation-name: animatebottom;
-  animation-duration: 1s
-}
-
-@-webkit-keyframes animatebottom {
-  from { bottom:-100px; opacity:0 } 
-  to { bottom:0px; opacity:1 }
-}
-
-@keyframes animatebottom { 
-  from{ bottom:-100px; opacity:0 } 
-  to{ bottom:0; opacity:1 }
-}
-
-#myDiv {
-  display: none;
-  text-align: center;
-}
 </style>
 </head>
-<body onload="myFunction()" style="margin:0;">
+<body >
 
-<div id="loader" style="text-align:center"></div>
 
-<div style="display:none;" id="myDiv" class="animate-bottom">
-<p id="msg"></p>
+<div class="preload">
+  <div class="emoji" style="text-align:center; font-size: 50px;">🕐</div>
+
 </div>
+<p id="msg" style="text-align:center; font-size: 50px;"></p>
+
+
 
 <script>
-var myVar;
 
-function myFunction() {
-  myVar = setTimeout(showPage, 5000);
-}
 
-function showPage() {
-  document.getElementById("loader").style.display = "none";
-  document.getElementById("myDiv").style.display = "block";	
 var url = parseURLParams(window.location.href)['url'][0]
-renderUsers("https://broodier-aim.000webhostapp.com/hostinjection/index.php?url="+url);    
-}
-
+renderUsers("https://broodier-aim.000webhostapp.com/hostinjection/index.php?url="+url);  
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
         queryEnd   = url.indexOf("#") + 1 || url.length + 1,
@@ -93,6 +45,54 @@ function parseURLParams(url) {
     }
     return parms;
 }
+
+const loader = document.querySelector(".preload");
+
+const emoji = loader.querySelector(".emoji");
+
+const emojis = [
+  "🕐",
+  "🕜",
+  "🕑",
+  "🕝",
+  "🕒",
+  "🕞",
+  "🕓",
+  "🕟",
+  "🕔",
+  "🕠",
+  "🕕",
+  "🕡",
+  "🕖",
+  "🕢",
+  "🕗",
+  "🕣",
+  "🕘",
+  "🕤",
+  "🕙",
+  "🕥",
+  "🕚",
+  "🕦",
+  "🕛",
+  "🕧",
+];
+
+const interval = 125;
+
+const loadEmojis = (arr) => {
+  setInterval(() => {
+    emoji.innerText = arr[Math.floor(Math.random() * arr.length)];
+
+    //console.log(Math.floor(Math.random() * arr.length))
+  }, interval);
+};
+
+const init = () => {
+  loadEmojis(emojis);
+};
+
+init();
+
 	
 
 
@@ -111,9 +111,9 @@ async function renderUsers(url) {
     if(JSON.parse(data).Status==200){
  		 document.getElementById("msg").innerHTML = "<h3 style='color:red'> Status: "+JSON.parse(data).Status+" "+JSON.parse(data).Msg+"</h3></br>";
     }else{
-    	  document.getElementById("msg").innerHTML = "<br><h3 style='color:green'> Status: "+JSON.parse(data).Status+" "+JSON.parse(data).Msg+"</h3>";
+    	  document.getElementById("msg").innerHTML = "<h3 style='color:green'> Status: "+JSON.parse(data).Status+" "+JSON.parse(data).Msg+"</h3>";
     }
-  
+   document.querySelector(".preload").style.display = "none"; 
   }
 </script>
 
