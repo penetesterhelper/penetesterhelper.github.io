@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+<meta charset="UTF-8">
+
+<style>
+
+
+</style>
+</head>
+<body >
+
+
+<div class="preload">
+  <div class="emoji" style="text-align:center; font-size: 50px;">🕐</div>
+
+</div>
+<p id="msg" style="text-align:center;"></p>
+
+
+
+<script>
+
+
+var url = parseURLParams(window.location.href)['url'][0]
+renderUsers("https://broodier-aim.000webhostapp.com/hostinjection/index.php?url="+url);  
+function parseURLParams(url) {
+    var queryStart = url.indexOf("?") + 1,
+        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
+        query = url.slice(queryStart, queryEnd - 1),
+        pairs = query.replace(/\+/g, " ").split("&"),
+        parms = {}, i, n, v, nv;
+
+    if (query === url || query === "") return;
+
+    for (i = 0; i < pairs.length; i++) {
+        nv = pairs[i].split("=", 2);
+        n = decodeURIComponent(nv[0]);
+        v = decodeURIComponent(nv[1]);
+
+        if (!parms.hasOwnProperty(n)) parms[n] = [];
+        parms[n].push(nv.length === 2 ? v : null);
+    }
+    return parms;
+}
+
+const loader = document.querySelector(".preload");
+
+const emoji = loader.querySelector(".emoji");
+
+const emojis = [
+  "🕐",
+  "🕜",
+  "🕑",
+  "🕝",
+  "🕒",
+  "🕞",
+  "🕓",
+  "🕟",
+  "🕔",
+  "🕠",
+  "🕕",
+  "🕡",
+  "🕖",
+  "🕢",
+  "🕗",
+  "🕣",
+  "🕘",
+  "🕤",
+  "🕙",
+  "🕥",
+  "🕚",
+  "🕦",
+  "🕛",
+  "🕧",
+];
+
+const interval = 125;
+
+const loadEmojis = (arr) => {
+  setInterval(() => {
+    emoji.innerText = arr[Math.floor(Math.random() * arr.length)];
+
+    //console.log(Math.floor(Math.random() * arr.length))
+  }, interval);
+};
+
+const init = () => {
+  loadEmojis(emojis);
+};
+
+init();
+
+	
+
+
+async function getUsers(url) {
+    try {
+        let res = await fetch(url);
+        return await res.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderUsers(url) {
+    let users = await getUsers(url);
+    data = '{"Status": "'+users.status+'", "Msg": "'+users.status_message+'"}';
+    if(JSON.parse(data).Status==200){
+ 		 document.getElementById("msg").innerHTML = "<h3 style='color:red'> Status: "+JSON.parse(data).Status+" "+JSON.parse(data).Msg+"</h3></br>";
+    }else{
+    	  document.getElementById("msg").innerHTML = "<h3 style='color:green'> Status: "+JSON.parse(data).Status+" "+JSON.parse(data).Msg+"</h3>";
+    }
+   document.querySelector(".preload").style.display = "none"; 
+  }
+</script>
+
+</body>
+</html>
+
+
+
+
