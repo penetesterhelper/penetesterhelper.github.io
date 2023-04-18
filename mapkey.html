@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Google Maps API Key Test</title>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyS0ucmIVs4dRxDwT3bbGopQ96XdUANoI"></script>
+	<script>
+		function initMap() {
+			var mapDiv = document.getElementById('map');
+			var map = new google.maps.Map(mapDiv, {
+				center: {lat: 40.7413549, lng: -73.9980244},
+				zoom: 13
+			});
+		}
+	</script>
+</head>
+<body onload="initMap()">
+	<div id="map" style="height: 500px;"></div>
+</body>
+</html>
