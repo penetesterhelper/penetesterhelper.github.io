@@ -1,0 +1,9 @@
+<script>
+       function getIp(ApiKey) {
+            $.getJSON("https://api.ipregistry.co/?key=" + ApiKey, function (data) {
+                console.log(data.ip)
+            }
+            );
+        }
+  getIp('05pd1dc541okwh48');
+</script>
