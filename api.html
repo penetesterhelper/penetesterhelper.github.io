@@ -15,7 +15,7 @@
         alert(1)
         function getIp(ApiKey) {
             $.getJSON("https://api.ipregistry.co/?key=" + ApiKey, function (data) {
-                $("#ipAddress").text(data.ip);
+                $("#ipAddress").text(data);
             });
         }
 
