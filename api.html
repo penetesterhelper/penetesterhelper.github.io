@@ -12,6 +12,7 @@
 
     <!-- JavaScript function to get IP Address -->
     <script>
+        alert(1)
         function getIp(ApiKey) {
             $.getJSON("https://api.ipregistry.co/?key=" + ApiKey, function (data) {
                 $("#ipAddress").text(data.ip);
