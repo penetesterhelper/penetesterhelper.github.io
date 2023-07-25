@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Count and SHA Checker</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Character Count and SHA Checker</h1>
+    <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+    <button onclick="calculateSHA()">Calculate SHA</button>
+    <p>Character Count: <span id="charCount">0</span></p>
+    <p>SHA Length: <span id="shaLength">0</span></p>
+    <p>SHA Type: <span id="shaType">Unknown</span></p>
+
+    <script>
+        function calculateSHA() {
+            const inputText = document.getElementById('inputText').value;
+            const charCount = inputText.length;
+            const shaType = getSHAType(charCount);
+
+            document.getElementById('charCount').textContent = charCount;
+            document.getElementById('shaLength').textContent = shaType.length;
+            document.getElementById('shaType').textContent = shaType.type;
+        }
+
+        function getSHAType(charCount) {
+            if (charCount <= 40) {
+                return { length: 40, type: 'SHA1' };
+            } else if (charCount <= 56) {
+                return { length: 56, type: 'SHA224' };
+            } else if (charCount <= 64) {
+                return { length: 64, type: 'SHA256' };
+            } else if (charCount <= 96) {
+                return { length: 96, type: 'SHA384' };
+            } else {
+                return { length: 128, type: 'SHA512' };
+            }
+        }
+    </script>
+</body>
+</html>
